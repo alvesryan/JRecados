@@ -1,9 +1,10 @@
 package br.com.ryan.jrecados.model;
 
+import java.util.Objects;
 import java.util.UUID; // Biblioteca pra gerar ID
 
 public class User {
-    private String id;
+    private final String id;
     private String name;
     private String email;
     private String department;
@@ -41,5 +42,17 @@ public class User {
 
     public void setDepartment(String department) {
         this.department = department;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }
