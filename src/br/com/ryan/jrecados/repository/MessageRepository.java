@@ -1,50 +1,30 @@
 package br.com.ryan.jrecados.repository;
 
 import br.com.ryan.jrecados.model.Message;
-import br.com.ryan.jrecados.model.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MessageRepository {
-    private List<Message> messagens;
+    Map<String, Message> messageDb = new HashMap<>();
 
-    public MessageRepository(){
-        this.messagens = new ArrayList<>();
-    }
-
-    public void save(Message message){
-        this.messagens.add(message);
+    public void create(Message newMessage){
+        messageDb.put(newMessage.getId(), newMessage); //Adicionando a mensagem dentro do Map
     }
 
     public List<Message> findAll(){
-        return this.messagens;
+        return new ArrayList<>(messageDb.values()); // passando todos os dados do Map, para a List
     }
 
-    public List<Message> findByDestination(String destinationName) {
-
-        List<Message> foundMessages = new ArrayList<>(); //Armazena as mensagens encontradas
-
-        for(Message m : this.messagens) {
-            if(m.getDestination().getName().equals(destinationName)) { //Se o parametro for igual ao nome destinatario
-                foundMessages.add(m); // Adicionamos na lista
-            }
+    //Método para deletar um recado que foi enviado
+    public void delete(String idMessage) {
+        if (messageDb.containsKey(idMessage)) {
+            messageDb.remove(idMessage);
+            System.out.println("Mensagem apagada.");
+        } else {
+            System.out.println("Nenhuma mensagem encontrada");
         }
-        return foundMessages;
-    }
-
-
-    public List<Message> findBySenderName(String senderName) {
-
-        List<Message> foundMessages = new ArrayList<>();
-
-        for(Message m : this.messagens) {
-            // Repare na diferença aqui: pegamos o Objeto Sender, e depois a String Name dele!
-            if(m.getSender().getName().equals(senderName)) {
-                foundMessages.add(m);
-            }
-        }
-
-        return foundMessages;
     }
 }

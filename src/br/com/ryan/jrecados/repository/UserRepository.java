@@ -3,29 +3,31 @@ package br.com.ryan.jrecados.repository;
 import br.com.ryan.jrecados.model.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UserRepository {
-    private List<User> users;
+    Map<String, User> userDb = new HashMap<>();
 
-    public UserRepository() {
-        this.users = new ArrayList<>();
+    //adicionando/atualizando usuário dentro do map
+    public void create(User newUser){
+        userDb.put(newUser.getId(), newUser);
     }
 
-    public void save(User user){
-        this.users.add(user);
+    //Listando os usuários
+    public List<User> findALl(){
+        return new ArrayList<>(userDb.values());
     }
 
-    public List<User> findAll(){ //Metodo que exibe toda a lista
-        return this.users;
-    }
-
-    public User findById(String idBusca){
-        for(User u : this.users){
-            if(u.getId().equals(idBusca)) {
-                return u;
-            }
+    public void delete(String idUser){
+        if(userDb.containsKey(idUser)){
+            userDb.remove(idUser);
+            System.out.println("Usuário deletado");
+        } else {
+            System.out.println("Usuário não encontrado");
         }
-        return null;
     }
+
+
 }

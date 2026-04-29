@@ -1,22 +1,25 @@
 package br.com.ryan.jrecados.model;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
+import java.util.UUID;
 
 public class Message {
-    private Long id;
+    private final String id;
     private User sender; //Remetente
-    private String content; //conteudo
+    private String content; //conteúdo
     private  User destination;
-    private LocalDateTime timestamp;
+    private final LocalDateTime timestamp;
 
     public Message(User sender, String content, User destination) {
+        this.id = UUID.randomUUID().toString();
         this.sender = sender;
         this.content = content;
         this.destination = destination;
         this.timestamp = LocalDateTime.now();
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
@@ -46,5 +49,17 @@ public class Message {
 
     public LocalDateTime getTimestamp() {
         return timestamp;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Message message = (Message) o;
+        return Objects.equals(id, message.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }
