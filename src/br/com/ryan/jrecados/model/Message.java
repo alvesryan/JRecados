@@ -12,7 +12,7 @@ public class Message {
     private final LocalDateTime timestamp;
 
     public Message(User sender, String content, User destination) {
-        this.id = UUID.randomUUID().toString();
+        this.id = UUID.randomUUID().toString().substring(0,4);
         this.sender = sender;
         this.content = content;
         this.destination = destination;

@@ -10,7 +10,7 @@ public class User {
     private String department;
 
     public User(String name, String email, String department){
-        this.id = UUID.randomUUID().toString();
+        this.id = UUID.randomUUID().toString().substring(0,4);
         this.name = name;
         this.email = email;
         this.department = department;
