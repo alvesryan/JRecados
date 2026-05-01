@@ -20,6 +20,10 @@ public class UserRepository {
         return new ArrayList<>(userDb.values());
     }
 
+    public User findById(String idUser){
+        return userDb.get(idUser);
+    }
+
     public void delete(String idUser){
         if(userDb.containsKey(idUser)){
             userDb.remove(idUser);

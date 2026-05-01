@@ -10,15 +10,17 @@ import java.util.Map;
 public class MessageRepository {
     Map<String, Message> messageDb = new HashMap<>();
 
+    //CREATE/UPDATE
     public void create(Message newMessage){
         messageDb.put(newMessage.getId(), newMessage); //Adicionando a mensagem dentro do Map
     }
 
+    //READ
     public List<Message> findAll(){
         return new ArrayList<>(messageDb.values()); // passando todos os dados do Map, para a List
     }
 
-    //Método para deletar um recado que foi enviado
+    //DELETE
     public void delete(String idMessage) {
         if (messageDb.containsKey(idMessage)) {
             messageDb.remove(idMessage);
