@@ -15,18 +15,19 @@ public class MessageRepository {
         messageDb.put(newMessage.getId(), newMessage); //Adicionando a mensagem dentro do Map
     }
 
-    //READ
-    public List<Message> findAll(){
-        return new ArrayList<>(messageDb.values()); // passando todos os dados do Map, para a List
+    //Usado pelo MessageService para filtrar dados
+    public List <Message> findAll(){
+        return new ArrayList<>(messageDb.values()); //Criando uma lista que contém todos os dados da Message
+    }
+
+    //Usado pelo MessageService para verificar o dono da mensagem
+    public Message findById(String idMessage){
+        return messageDb.get(idMessage); //retorna apenas a mensagem que contém o Id passado
     }
 
     //DELETE
     public void delete(String idMessage) {
-        if (messageDb.containsKey(idMessage)) {
-            messageDb.remove(idMessage);
-            System.out.println("Mensagem apagada.");
-        } else {
-            System.out.println("Nenhuma mensagem encontrada");
-        }
+        messageDb.remove(idMessage);
     }
+
 }
