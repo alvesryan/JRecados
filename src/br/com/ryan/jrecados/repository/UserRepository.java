@@ -16,7 +16,7 @@ public class UserRepository {
     }
 
     //Listando os usuários
-    public List<User> findALl(){
+    public List<User> findAll(){
         return new ArrayList<>(userDb.values());
     }
 
@@ -25,12 +25,7 @@ public class UserRepository {
     }
 
     public void delete(String idUser){
-        if(userDb.containsKey(idUser)){
-            userDb.remove(idUser);
-            System.out.println("Usuário deletado");
-        } else {
-            System.out.println("Usuário não encontrado");
-        }
+        userDb.remove(idUser);
     }
 
 

@@ -8,12 +8,14 @@ public class User {
     private String name;
     private String email;
     private String department;
+    private boolean ativo;
 
     public User(String name, String email, String department){
         this.id = UUID.randomUUID().toString().substring(0,4);
         this.name = name;
         this.email = email;
         this.department = department;
+        this.ativo = true;
     }
 
     public String getId() {
@@ -42,6 +44,14 @@ public class User {
 
     public void setDepartment(String department) {
         this.department = department;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 
     @Override
